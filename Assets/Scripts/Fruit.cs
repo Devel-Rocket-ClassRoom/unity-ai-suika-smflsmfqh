@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D), typeof(CircleCollider2D), typeof(SpriteRenderer))]
+[RequireComponent(typeof(Rigidbody2D), typeof(PolygonCollider2D), typeof(SpriteRenderer))]
 public class Fruit : MonoBehaviour
 {
     public int Level { get; private set; }
@@ -20,13 +20,13 @@ public class Fruit : MonoBehaviour
 
     private bool isMerging;
     private Rigidbody2D rb;
-    private CircleCollider2D col;
+    private PolygonCollider2D col;
     private SpriteRenderer sr;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        col = GetComponent<CircleCollider2D>();
+        col = GetComponent<PolygonCollider2D>();
         sr = GetComponent<SpriteRenderer>();
     }
 
@@ -46,9 +46,23 @@ public class Fruit : MonoBehaviour
         Level = level;
         var cfg = GameManager.Configs[level];
         transform.localScale = Vector3.one * cfg.radius * 2f;
-        sr.sprite = GameManager.CircleSprite;
-        sr.color = cfg.color;
-        col.radius = 0.5f;
+
+        var sprite = GameManager.GetFruitSprite(level);
+        sr.sprite = sprite;
+        sr.color = Color.white;
+
+        if (sprite != null)
+        {
+            int shapeCount = sprite.GetPhysicsShapeCount();
+            col.pathCount = shapeCount;
+            var points = new List<Vector2>();
+            for (int i = 0; i < shapeCount; i++)
+            {
+                sprite.GetPhysicsShape(i, points);
+                col.SetPath(i, points.ToArray());
+            }
+        }
+
         rb.bodyType = RigidbodyType2D.Kinematic;
         rb.gravityScale = 0;
         col.enabled = false;

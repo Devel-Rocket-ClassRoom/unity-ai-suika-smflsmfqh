@@ -81,4 +81,23 @@ public class FruitSpawner : MonoBehaviour
         var fruit = GetFromPool(level, pos);
         fruit.Drop();
     }
+
+    public void ResetAll()
+    {
+        StopAllCoroutines();
+
+        if (currentFruit != null)
+        {
+            currentFruit.Deactivate();
+            pool.Enqueue(currentFruit);
+            currentFruit = null;
+        }
+
+        var toRelease = new List<Fruit>(Fruit.ActiveFruits);
+        foreach (var fruit in toRelease)
+            Release(fruit);
+
+        canDrop = false;
+        PrepareNext();
+    }
 }

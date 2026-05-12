@@ -44,7 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3e2e65d1320eb142b6287e876323727, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FruitSpawner
+  fruitPrefab: {fileID: 3282214398215153055, guid: 8c10081756a6dfe40abc33be6ce85401, type: 3}
   spawnY: 5
   minX: -2.2
   maxX: 2.2
-  dropCooldown: 1
+  dropCooldown: 0.7

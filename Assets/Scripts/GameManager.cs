@@ -20,86 +20,90 @@ public class GameManager : MonoBehaviour
         new FruitConfig
         {
             fruitName = "Cherry",
-            radius = 0.25f,
+            radius = 0.375f,
             color = new Color(0.80f, 0.10f, 0.10f),
             score = 1,
         },
         new FruitConfig
         {
             fruitName = "Strawberry",
-            radius = 0.35f,
+            radius = 0.525f,
             color = new Color(0.90f, 0.30f, 0.20f),
             score = 3,
         },
         new FruitConfig
         {
             fruitName = "Grape",
-            radius = 0.45f,
+            radius = 0.675f,
             color = new Color(0.50f, 0.20f, 0.70f),
             score = 6,
         },
         new FruitConfig
         {
             fruitName = "Tangerine",
-            radius = 0.55f,
+            radius = 0.825f,
             color = new Color(1.00f, 0.60f, 0.10f),
             score = 10,
         },
         new FruitConfig
         {
             fruitName = "Peach",
-            radius = 0.65f,
+            radius = 0.975f,
             color = new Color(0.90f, 0.40f, 0.10f),
             score = 15,
         },
         new FruitConfig
         {
             fruitName = "Apple",
-            radius = 0.75f,
+            radius = 1.125f,
             color = new Color(0.90f, 0.10f, 0.10f),
             score = 21,
         },
         new FruitConfig
         {
             fruitName = "Pair",
-            radius = 0.90f,
+            radius = 1.35f,
             color = new Color(0.90f, 0.90f, 0.40f),
             score = 28,
         },
         new FruitConfig
         {
             fruitName = "Peach",
-            radius = 1.05f,
+            radius = 1.575f,
             color = new Color(1.00f, 0.70f, 0.70f),
             score = 36,
         },
         new FruitConfig
         {
             fruitName = "Pineapple",
-            radius = 1.20f,
+            radius = 1.80f,
             color = new Color(0.90f, 0.80f, 0.10f),
             score = 45,
         },
         new FruitConfig
         {
             fruitName = "Melon",
-            radius = 1.40f,
+            radius = 2.10f,
             color = new Color(0.50f, 0.90f, 0.40f),
             score = 55,
         },
         new FruitConfig
         {
             fruitName = "Watermelon",
-            radius = 1.60f,
+            radius = 2.40f,
             color = new Color(0.20f, 0.70f, 0.20f),
             score = 66,
         },
     };
 
-    public static Sprite CircleSprite { get; private set; }
+    [SerializeField]
+    private Sprite[] fruitSprites;
+
+    public static Sprite GetFruitSprite(int level) => gameManager?.fruitSprites[level];
 
     public event Action<int> OnScoreChanged;
     public event Action OnGameOver;
+    public event Action OnGameReset;
 
     public int Score { get; private set; }
     public bool IsGameOver { get; private set; }
@@ -112,26 +116,6 @@ public class GameManager : MonoBehaviour
             return;
         }
         gameManager = this;
-        CircleSprite = CreateCircleSprite();
-    }
-
-    private static Sprite CreateCircleSprite()
-    {
-        const int size = 128;
-        var tex = new Texture2D(size, size, TextureFormat.RGBA32, false);
-        float c = size * 0.5f;
-        float r = c - 1f;
-        var pixels = new Color[size * size];
-        for (int y = 0; y < size; y++)
-        for (int x = 0; x < size; x++)
-        {
-            float dx = x - c,
-                dy = y - c;
-            pixels[y * size + x] = (dx * dx + dy * dy <= r * r) ? Color.white : Color.clear;
-        }
-        tex.SetPixels(pixels);
-        tex.Apply();
-        return Sprite.Create(tex, new Rect(0, 0, size, size), new Vector2(0.5f, 0.5f), size);
     }
 
     public void AddScore(int amount)
@@ -150,5 +134,13 @@ public class GameManager : MonoBehaviour
         OnGameOver?.Invoke();
     }
 
-    public void RestartGame() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    public void ResetGame()
+    {
+        IsGameOver = false;
+        Score = 0;
+        OnScoreChanged?.Invoke(0);
+        if (FruitSpawner.fruitSpawner != null)
+            FruitSpawner.fruitSpawner.ResetAll();
+        OnGameReset?.Invoke();
+    }
 }

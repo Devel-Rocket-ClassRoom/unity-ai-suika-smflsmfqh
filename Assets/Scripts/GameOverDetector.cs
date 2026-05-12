@@ -15,6 +15,21 @@ public class GameOverDetector : MonoBehaviour
             dangerY = dangerLine.position.y;
         else
             Debug.LogError("Danger line reference is missing on GameOverDetector.");
+
+        if (GameManager.gameManager != null)
+            GameManager.gameManager.OnGameReset += ResetDetector;
+    }
+
+    private void OnDestroy()
+    {
+        if (GameManager.gameManager != null)
+            GameManager.gameManager.OnGameReset -= ResetDetector;
+    }
+
+    private void ResetDetector()
+    {
+        dangerTimer = 0f;
+        startDelay = 2f;
     }
 
     private void Update()
