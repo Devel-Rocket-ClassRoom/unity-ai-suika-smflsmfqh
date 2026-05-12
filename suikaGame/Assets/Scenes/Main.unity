@@ -1013,6 +1013,11 @@ Texture2D:
     offset: 0
     size: 0
     path: 
+--- !u!4 &1373381754 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1405144720563603553, guid: 26ecafaa49a58394783a21f936f1cafb, type: 3}
+  m_PrefabInstance: {fileID: 6092735244726749679}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1519247024 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 895923874963290489, guid: 92ab57c7878a2754b8a99e4c3b796491, type: 3}
@@ -1201,6 +1206,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 8015907000443245779, guid: c67bd5481eb095d4fa1edb66da42941d, type: 3}
+      propertyPath: m_text
+      value: Restart
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172460143086815028, guid: c67bd5481eb095d4fa1edb66da42941d, type: 3}
+      propertyPath: m_text
+      value: 'Final Score
+
+        0'
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1254,6 +1269,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2728459920905092190, guid: 68d6a49016dfd9445996fb3c3da6400f, type: 3}
+      propertyPath: dangerY
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2728459920905092190, guid: 68d6a49016dfd9445996fb3c3da6400f, type: 3}
+      propertyPath: dangerLine
+      value: 
+      objectReference: {fileID: 1373381754}
     - target: {fileID: 3669648830786092780, guid: 68d6a49016dfd9445996fb3c3da6400f, type: 3}
       propertyPath: m_Name
       value: GameOverDetector_GO
@@ -1694,6 +1717,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1405144720563603553, guid: 26ecafaa49a58394783a21f936f1cafb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5.11
+      objectReference: {fileID: 0}
     - target: {fileID: 4221997361775824310, guid: 26ecafaa49a58394783a21f936f1cafb, type: 3}
       propertyPath: m_Name
       value: Container
@@ -1703,6 +1730,22 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 186483325}
     - target: {fileID: 5750794380383113926, guid: 26ecafaa49a58394783a21f936f1cafb, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5750794380383113926, guid: 26ecafaa49a58394783a21f936f1cafb, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6203602420524962848, guid: 26ecafaa49a58394783a21f936f1cafb, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1936298242}
+    - target: {fileID: 6203602420524962848, guid: 26ecafaa49a58394783a21f936f1cafb, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6203602420524962848, guid: 26ecafaa49a58394783a21f936f1cafb, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
