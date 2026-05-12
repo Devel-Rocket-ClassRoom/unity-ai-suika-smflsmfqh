@@ -94,15 +94,15 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!58 &6586404428845870602
-CircleCollider2D:
+--- !u!60 &6586404428845870602
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1966502644685915532}
   m_Enabled: 1
-  serializedVersion: 3
+  serializedVersion: 2
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -129,7 +129,9 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.5
+  m_PathCount: 0
+  m_Paths: []
+  m_UseDelaunayMesh: 0
 --- !u!50 &8061952195531345605
 Rigidbody2D:
   serializedVersion: 5
@@ -169,4 +171,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c46dd9c0ca1d85640bb97f835b60ba07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Fruit
-  bounceForce: 0.7
+  bounceSpeedRef: 6
+  minBounceForce: 0.4
+  maxBounceForce: 2

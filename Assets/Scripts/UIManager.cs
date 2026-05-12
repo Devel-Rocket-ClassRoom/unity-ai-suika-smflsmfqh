@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour
     [Header("UI References")]
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI nextFruitLabel;
+    public Image nextFruitImage;
     public GameObject gameOverPanel;
     public TextMeshProUGUI finalScoreText;
     public Button restartButton;
@@ -17,10 +18,7 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-        if (restartButton)
-        {
-            restartButton.onClick.AddListener(OnRestartButton);
-        }
+        restartButton.onClick.AddListener(OnRestartButton);
 
         if (GameManager.gameManager != null)
         {
@@ -29,7 +27,8 @@ public class UIManager : MonoBehaviour
         }
 
         UpdateScore(0);
-        gameOverPanel?.SetActive(false);
+        if (gameOverPanel != null)
+            gameOverPanel.SetActive(false);
     }
 
     private void UpdateScore(int score)
@@ -42,6 +41,11 @@ public class UIManager : MonoBehaviour
     {
         if (nextFruitLabel)
             nextFruitLabel.text = $"Next: {GameManager.Configs[level].fruitName}";
+        if (nextFruitImage)
+        {
+            nextFruitImage.sprite = GameManager.GetFruitSprite(level);
+            nextFruitImage.preserveAspect = true;
+        }
     }
 
     private void ShowGameOver()
@@ -52,5 +56,11 @@ public class UIManager : MonoBehaviour
             finalScoreText.text = $"Final Score\n{GameManager.gameManager.Score:N0}";
     }
 
-    public void OnRestartButton() => GameManager.gameManager?.RestartGame();
+    public void OnRestartButton()
+    {
+        if (gameOverPanel != null)
+            gameOverPanel.SetActive(false);
+        if (GameManager.gameManager != null)
+            GameManager.gameManager.ResetGame();
+    }
 }
